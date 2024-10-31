@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+  body {
+    background-color: black; /* Black background for the body */
+    color: white; /* White text color for contrast */
+  }
+
+  .form-container {
+    max-width: 600px; /* Set maximum width for the form */
+    margin: auto; /* Center the form horizontally */
+    padding: 20px; /* Padding inside the form */
+    border: 1px solid #ddd; /* Light gray border */
+    border-radius: 10px; /* Rounded corners */
+    background-color: #222; /* Dark background for the form */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Shadow effect for depth */
+  }
+
+  h3 {
+    margin-bottom: 20px; /* Space below the heading */
+    font-weight: bold; /* Bold text for the heading */
+    color: #f7b731; /* Bright yellow color for the heading */
+  }
+
+  .form-label {
+    color: #f7b731; /* Yellow label color for better visibility */
+  }
+
+  .form-control {
+    background-color: #333; /* Dark background for input fields */
+    border: 1px solid #444; /* Slightly lighter border */
+    color: white; /* White text color in input fields */
+  }
+
+  .form-control::placeholder {
+    color: #aaa; /* Placeholder text color */
+  }
+
+  .btn-primary {
+    background-color: #f7b731; /* Yellow button color */
+    border: none; /* No border for the button */
+  }
+
+  .btn-primary:hover {
+    background-color: #e6a12a; /* Darker shade of yellow on hover */
+  }
+
+  .form-select {
+    background-color: #333; /* Dark background for select */
+    color: white; /* White text for select */
+  }
+</style>
+
+<div class="form-container">
+  <form method="post" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h3>Add New Product</h3>
+
+    <!-- Name Field -->
+    <div class="mb-3">
+      <label class="form-label">Product Name</label>
+      <input type="text" class="form-control" name="n" maxlength="20" placeholder="Enter product name" required>
+    </div>
+
+    <!-- Description Field -->
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <textarea class="form-control" name="d" rows="4" placeholder="Enter description" required></textarea>
+    </div>
+
+    <!-- Image Upload Field -->
+    <div class="mb-3">
+      <label class="form-label">Upload Image</label>
+      <input type="file" class="form-control" name="i" accept="image/*" required>
+    </div>
+
+    <!-- Price Field -->
+    <div class="mb-3">
+      <label class="form-label">Price</label>
+      <input type="number" class="form-control" name="p" step="0.01" placeholder="Enter price" required>
+    </div>
+
+    <!-- Stock Field -->
+    <div class="mb-3">
+      <label class="form-label">Stock</label>
+      <input type="number" class="form-control" name="s" placeholder="Enter stock quantity" required>
+    </div>
+
+    <!-- Category Field -->
+    <div class="mb-3">
+      <label for="category" class="form-label">Category</label>
+      <select class="form-select" id="category" name="c" required>
+        <option value="" disabled selected>Select a category</option>
+        {% for i in links %}
+          <option value="{{ i.name }}">{{ i.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary">Add Product</button>
+  </form>
+</div>
+
+{% endblock %}

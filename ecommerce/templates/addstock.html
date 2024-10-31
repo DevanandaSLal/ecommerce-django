@@ -1,0 +1,23 @@
+% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+    <h2>Stock Form</h2>
+
+<form method="post" action="" enctype="multipart/form-data" style="max-width: 600px; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background-color: #f8f9fa;">
+  {% csrf_token %}
+
+  <div class="mb-3">
+    <label class="form-label">Stock</label>
+    <input type="number" class="form-control" value="{{pro.stock}}"  name="n" required>
+  </div>
+
+
+
+  <!-- Submit Button -->
+  <button type="submit" class="btn btn-primary">Add stock</button>
+</form>
+
+
+{% endblock %}

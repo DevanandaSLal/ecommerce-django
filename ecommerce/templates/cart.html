@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5 p-3" style="margin-bottom:100px; color:black;">
+    <div class="row">
+        <h2 class="text-center mb-5" style="color: #f7b731;">Shopping Cart</h2>
+        <div class="col-7">
+            <table class="table table-bordered border-1 shadow" style="background-color: white; color: black;">
+                <tr>
+                    <th colspan="6" class="text-center fs-w" style="background-color: #f7b731; color: white;">Cart Items</th>
+                </tr>
+                {% for i in cart %}
+                <tr>
+                    <td class="p-2"><img src="{{i.product.image.url}}" height="100px" width="100px" style="border: 2px solid #f7b731;"></td>
+                    <td class="p-2">{{i.product.name}}</td>
+                    <td class="p-2">Unit Price: {{i.product.price}} <br>
+                    Quantity: {{i.quantity}}</td>
+                    <td class="p-2">Subtotal: {{i.subtotal}}</td>
+                    <td class="p-2 text-center">
+                        {% if i.product.stock > 0 %}
+                        <a href="{% url 'cart:addtocart' i.product.id %}">
+                            <i class="fa-solid fa-circle-plus text-dark mx-1" style="color: #f7b731;"></i>
+                        </a>
+                        <a href="{% url 'cart:cartremove' i.product.id%}">
+                            <i class="fa-solid fa-circle-minus text-dark mx-1"></i>
+                        </a>
+                        <a href="{% url 'cart:cartdelete' i.product.id%}">
+                            <i class="fa-solid fa-trash-can text-success mx-1"></i>
+                        </a>
+                        {% else %}
+                        <a href="{% url 'cart:cartremove' i.product.id%}">
+                            <i class="fa-solid fa-circle-minus text-dark mx-1"></i>
+                        </a>
+                        <a href="{% url 'cart:cartdelete' i.product.id%}">
+                            <i class="fa-solid fa-trash-can text-success mx-1"></i>
+                        </a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col-4">
+            <table class="table table-bordered border-1 shadow" style="background-color: white; color: black;">
+                <tr>
+                    <th colspan="4" class="text-center fs-w" style="background-color: #f7b731; color: white;">Check Out</th>
+                </tr>
+                <tr>
+                    <td style="color: black;">Total Price: {{total}}</td>
+                </tr>
+            </table>
+            <div class="d-grid gap-2">
+                <a href="{% url 'cart:orderform' %}" class="btn btn-dark btn-hover" style="background-color: #f7b731; color: white; border-radius: 25px;">Order Now</a>
+                <a href="{% url 'shop:categories' %}" class="btn btn-dark btn-hover" style="background-color: #f7b731; color: white; border-radius: 25px;">Continue Shopping</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

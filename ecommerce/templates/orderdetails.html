@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-5 mx-auto" style="margin-bottom:100px;">
+    <div class="row text-center">
+        <h4 class="text-center mb-5" style="color: #f7b731;">Name of the customer: <span class="text-white">{{ user.username }}</span></h4>
+        {% for i in orders %}
+        <div class="card mb-4 mx-auto" style="max-width: 600px; background-color: #1c1c1c; border: 2px solid #f7b731; border-radius: 10px;">
+            <div class="row g-0 d-flex align-items-start">
+
+                <!-- Image section -->
+                <div class="col-md-4 d-flex align-items-center">
+                    <img src="{{ i.product.image.url }}" class="img-fluid rounded-start" alt="Product Image" style="width: 100%; object-fit: cover; border-right: 2px solid #f7b731;">
+                </div>
+
+                <!-- Card body section -->
+                <div class="col-md-8 d-flex flex-column">
+                    <div class="card-body text-white">
+
+                        <!-- Product Name -->
+                        <div class="d-flex justify-content-between mb-2">
+                            <h6 class="mb-0" style="color: #f7b731;">Product name:</h6>
+                            <span class="fw-bold">{{ i.product.name }}</span>
+                        </div>
+
+                        <!-- Price -->
+                        <div class="d-flex justify-content-between mb-2">
+                            <p class="mb-0" style="color: #f7b731;">Price:</p>
+                            <span class="text-warning fw-bold">₹{{ i.product.price }}</span>
+                        </div>
+
+                        <!-- Quantity -->
+                        <div class="d-flex justify-content-between mb-2">
+                            <p class="mb-0" style="color: #f7b731;">Quantity:</p>
+                            <span class="fw-bold">{{ i.no_of_items }}</span>
+                        </div>
+
+                        <!-- Delivery Address -->
+                        <div class="d-flex justify-content-between mb-2">
+                            <p class="mb-0" style="color: #f7b731;">Delivery address:</p>
+                            <span class="fw-bold">{{ i.address }}</span>
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="d-flex justify-content-between mb-2">
+                            <p class="mb-0" style="color: #f7b731;">Phone:</p>
+                            <span class="fw-bold">{{ i.phoneno }}</span>
+                        </div>
+
+                        <!-- Ordered Date -->
+                        <div class="d-flex justify-content-between mb-2">
+                            <p class="mb-0" style="color: #f7b731;">Ordered on:</p>
+                            <span class="fw-bold">{{ i.ordered_date }}</span>
+                        </div>
+
+                        <!-- Delivery Status -->
+                        <div class="d-flex justify-content-between mb-2">
+                            <p class="mb-0" style="color: #f7b731;">Delivery status:</p>
+                            <span class="text-danger">{{ i.delivery_status }}</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

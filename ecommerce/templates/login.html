@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card mx-auto p-4 border-0" style="max-width: 400px; background-color: #1c1c1c; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);">
+        <h2 class="text-center mb-4" style="color: #f7c552;">Login</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label" style="color: white;">Username</label>
+                <input type="text" class="form-control" name="u" placeholder="Enter the username" style="background-color: #333; color: white; border: none;">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" style="color: white;">Password</label>
+                <input type="password" class="form-control" name="p" placeholder="Enter the password" style="background-color: #333; color: white; border: none;">
+            </div>
+            <div class="text-center mt-4">
+                <input type="submit" value="LOGIN" class="btn" style="background-color: #f7c552; color: black; font-weight: bold; padding: 10px 20px; border-radius: 5px;">
+            </div>
+        </form>
+
+        {% if messages %}
+            <ul class="messages text-success mt-3" style="list-style-type: none; padding: 0;">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %} style="color: #f7c552;">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

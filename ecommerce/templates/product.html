@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Banner Image Section -->
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+            <div class="banner-container" style="border-radius: 12px; overflow: hidden; background-color: #1c1c1c; padding: 20px; box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);">
+                <img src="{{cat.image.url}}" class="img-fluid" style="width: 100%; height: auto; border-radius: 10px;">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Category Details Section -->
+<div class="container mt-5 p-5" style="background-color: #333; border-radius: 10px; max-width: 800px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+    <h3 class="text-center" style="color: #f7c552; font-weight: bold; font-family: 'Arial Black', sans-serif;">{{cat.name}}</h3>
+    <p style="text-align: justify; line-height: 1.8; color: #d3d3d3; font-size: 1.1rem; padding: 15px; font-family: 'Georgia', serif;">
+        {{cat.desc}}
+    </p>
+</div>
+
+<!-- Product Cards Section -->
+<div class="container mb-5">
+    <div class="row" style="margin-top: 50px; margin-bottom: 100px;">
+        {% for i in product %}
+        <div class="col-sm-4 mb-5">
+            <div class="card mx-auto border-0" style="width: 100%; background-color: #282828; border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                <img src="{{i.image.url}}" height="200px" width="100%" class="card-img-top" alt="..." style="border-top-left-radius: 12px; border-top-right-radius: 12px;">
+                <div class="card-body text-center">
+                    <h5 class="card-title" style="color: #f7c552; font-weight: 600;">{{i.name}}</h5>
+                    <h5 class="card-title" style="color: #f1f1f1;">${{i.price}}</h5>
+                    <a href="{% url 'shop:detail' i.id %}" class="btn" style="background-color: #f7c552; color: black; border-radius: 4px; font-weight: bold;">Details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

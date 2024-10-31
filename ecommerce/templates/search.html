@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container mb-5">
+    <h3 class="text-center" style="color: #f7c552;">You have searched for <span class="text-success">{{q}}</span></h3>
+    {% if not product %}
+        <h5 class="text-center text-warning" id="no-results-message">No results found</h5>
+        <div class="text-center mt-3">
+            <button class="btn" onclick="showNotFoundMessage()" style="background-color: #f7c552; color: black; border-radius: 5px; font-weight: bold;">
+                Check for Result
+            </button>
+        </div>
+    {% else %}
+        <div class="row" style="margin-bottom: 200px;">
+            {% for i in product %}
+                <div class="col-sm-4">
+                    <div class="card mx-auto border border-0" style="width: 18rem; background-color: #1c1c1c; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);">
+                        <img src="{{i.image.url}}" height="200px" width="100%" class="card-img-top" alt="..." style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title" style="color: #f7c552;">{{i.name}}</h5>
+                            <h5 class="card-title" style="color: white;">${{i.price}}</h5>
+                            <a href="{% url 'shop:detail' i.id %}" class="btn" style="background-color: #f7c552; color: black; border-radius: 5px; padding: 8px 16px; font-weight: bold;">
+                                Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+<script>
+function showNotFoundMessage() {
+    const noResultsMessage = document.getElementById("no-results-message");
+    noResultsMessage.textContent = "The item you searched for is not present.";
+}
+</script>
+
+{% endblock %}

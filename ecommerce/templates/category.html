@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col-12">
+<img src="{% static 'images/bnner.jpg' %}" height="600px" width="100%">
+    </div>
+    </div>
+<div class="row mt-5 mb-4" style="margin-bottom:200px">
+    <div class="col-12 px-3">
+        <h3 class="text-center mt-5 fs-1" style="color:#f7b731;font-family:'Playfair Display', serif">Our Collections</h3>
+       <div class="container p-5 my-4" style="background-color:#ffffff; color:#000000; border-radius:15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <h2 class="text-center" style="color:#f7b731; font-family:'Playfair Display', serif;">Welcome to Our Online Store!</h2>
+    <p style="text-align:justify; line-height:2.2; font-size:1.2rem; font-family:'Open Sans', sans-serif;">
+        Discover a wide range of products carefully curated to meet your style and needs. Shopping on our site is easy, fast, and secure. We offer:
+    </p>
+    <ul class="list-unstyled fs-5" style="color:#000; line-height:2.0;">
+        <li class="mb-2">
+            <i class="fa-solid fa-check-circle" style="color:#f7b731;"></i> <strong>Wide Collection</strong>: Explore our diverse categories, including fashion, footwear, bags, and more, offering unique products of the highest quality.
+        </li>
+        <li class="mb-2">
+            <i class="fa-solid fa-check-circle" style="color:#f7b731;"></i> <strong>Secure Payment</strong>: Rest assured with our safe and secure payment options.
+        </li>
+        <li class="mb-2">
+            <i class="fa-solid fa-check-circle" style="color:#f7b731;"></i> <strong>Fast Delivery</strong>: Experience quick shipping with real-time tracking.
+        </li>
+        <li class="mb-2">
+            <i class="fa-solid fa-check-circle" style="color:#f7b731;"></i> <strong>Customer Support</strong>: We're here to assist you 24/7 with any inquiries.
+        </li>
+    </ul>
+</div>
+
+
+
+    </div>
+
+
+</div>
+<div class="container mb-5">
+    <div class="row" style="margin-bottom:200px">
+        {% for i in cat %}
+        <div class="col-sm-4 ">
+            <div class="card mx-auto border border-2 border-rounded shadow-lg"
+                 style="width: 18rem; border-radius: 15px; overflow: hidden; border-color: #f7b731;">
+                <img src="{{i.image.url}}" height="200px" width="100%" class="card-img-top" alt="...">
+                <div class="card-body text-center">
+                    <h5 class="card-title" style="font-weight: bold; color: black;">{{i.name}}</h5>
+                    <a href="{% url 'shop:products' i.id %}" class="btn"
+                       style="background-color: #f7b731; color: white; border-radius: 25px; padding: 10px 20px;">Products</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+{% endblock %}
